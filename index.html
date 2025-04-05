@@ -1,1 +1,46 @@
-Hello World !!!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message Receiver</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1em;
+    }
+    #messages {
+      margin-top: 1em;
+      padding: 1em;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .message {
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Iframe Message Receiver</h1>
+  <p>Messages from parent window will appear below:</p>
+  <div id="messages"></div>
+
+  <script>
+    const messagesDiv = document.getElementById('messages');
+
+    window.addEventListener('message', (event) => {
+      // For security, you might want to check event.origin
+      // Example: if (event.origin !== 'https://yourdomain.com') return;
+
+      const msg = document.createElement('div');
+      msg.className = 'message';
+      msg.textContent = `Message received: ${JSON.stringify(event.data)}`;
+      messagesDiv.appendChild(msg);
+    });
+  </script>
+</body>
+</html>
